@@ -1,0 +1,22 @@
+{% extends 'flatpages/default.html' %}
+
+
+{% block title %}
+ResponceList
+{% endblock title %}
+
+
+{% block content %}
+        <div class="card mb-4">
+            {% for response in responses %}
+                <div class="card-body">
+                    <div class="small text-muted">{{ response.author.username }}</div>
+                    <p class="card-text">{{ response.content }}</p>
+                    <a class="btn btn-primary" href="{% url 'response_accept' pk=response.id %}">Принять отклик</a>
+                    <a class="btn btn-primary" href="{% url 'response_delete' pk=response.id %}">Удалить отклик</a>
+                </div>
+            {% empty %}
+                <h2 class="card-title">нет откликов</h2>
+            {% endfor %}
+        </div>
+{% endblock content %}

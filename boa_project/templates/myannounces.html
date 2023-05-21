@@ -1,0 +1,22 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+myresponses
+{% endblock title %}
+
+{% block content %}
+    {% for announce in myannounces %}
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="small text-muted">{{ announce.author.username }}</div>
+                <h2 class="card-title">{{ announce.title }}</h2>
+                <p class="card-text">{{ announce.content|safe }}</p>
+                <a class="btn btn-primary" href="{% url 'announce_update' pk=announce.id %}">Редактировать</a>
+                <a class="btn btn-primary" href="{% url 'announce_delete' pk=announce.id %}">Удалить</a>
+                <a class="btn btn-primary" href="{% url 'responses_list' pk=announce.id %}">Посмотреть отклики</a>
+            </div>
+        </div>
+    {% empty %}
+        <h2 class="card-title">нет объявлений</h2>
+    {% endfor %}
+{% endblock content %}
